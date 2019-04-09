@@ -1,0 +1,34 @@
+---
+
+- name: Install docker from ubuntu cloud archives
+  apt:
+    name: docker.io
+    state: present
+    package: latest
+    update_cache: yes
+
+- name: Ensure that docker group exists
+  group:
+    name: docker
+    state: present
+    system: yes
+
+- name: Add default home user to docker group
+  user:
+    name: "{{ defaultUser }}"
+    groups: docker
+    append: yes
+
+- name: Generate docker daemon configuration
+  template:
+    src: daemon.json.j2
+    dest: /etc/docker/daemon.json
+    owner: root
+    group: root
+  notify:
+    - restart docker
+
+- name: Force systemd to reread configs
+  systemd:
+    daemon_reload: yes
+

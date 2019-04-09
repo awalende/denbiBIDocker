@@ -1,0 +1,23 @@
+galaxy_info:
+  author: Alex Walender
+  description: Installs and configure docker for the deNBI Cloud located in Bielefeld Germany.
+  company: deNBI
+
+
+  license: Apache
+
+  min_ansible_version: 2.7
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - bionic
+
+
+  galaxy_tags:
+    - docker
+    - denbi
+    - container
+    - cloud
+
+dependencies: []
